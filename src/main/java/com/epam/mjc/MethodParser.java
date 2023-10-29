@@ -44,14 +44,12 @@ public class MethodParser {
         if (openParenIndex != -1 && closeParenIndex != -1) {
             String argsString = signatureString.substring(openParenIndex + 1, closeParenIndex);
 
-            if (!argsString.isBlank()) {
-                String[] args = argsString.split(",\\s*");
+            String[] args = argsString.split(",\\s*");
 
-                for (String arg : args) {
-                    String[] argParts = arg.split("\\s+");
-                    if (argParts.length == 2) {
-                        arguments.add(new MethodSignature.Argument(argParts[0], argParts[1]));
-                    }
+            for (String arg : args) {
+                String[] argParts = arg.split("\\s+");
+                if (argParts.length == 2) {
+                    arguments.add(new MethodSignature.Argument(argParts[0], argParts[1]));
                 }
             }
         }
