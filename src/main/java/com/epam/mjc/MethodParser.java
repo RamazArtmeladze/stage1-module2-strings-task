@@ -39,14 +39,18 @@ public class MethodParser {
             accessModifier = parts[0];
         }
 
-        String argsString = signatureString.substring(signatureString.indexOf('(') + 1, signatureString.indexOf(')'));
+        int openParenIndex = signatureString.indexOf('(');
+        int closeParenIndex = signatureString.indexOf(')');
+        if (openParenIndex != -1 && closeParenIndex != -1) {
+            String argsString = signatureString.substring(openParenIndex + 1, closeParenIndex);
 
-        String[] args = argsString.split(",\\s*");
+            String[] args = argsString.split(",\\s*");
 
-        for (String arg : args) {
-            String[] argParts = arg.split("\\s+");
-            if (argParts.length == 2) {
-                arguments.add(new MethodSignature.Argument(argParts[0], argParts[1]));
+            for (String arg : args) {
+                String[] argParts = arg.split("\\s+");
+                if (argParts.length == 2) {
+                    arguments.add(new MethodSignature.Argument(argParts[0], argParts[1]));
+                }
             }
         }
 
